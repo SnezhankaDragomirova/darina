@@ -3,41 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VR 360 – Krakra</title>
+  <title>VR 360 – Галерия</title>
 
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-  <!-- минимално “нужно” CSS само за да се вижда сцената -->
   <style>
     html, body { margin: 0; height: 100%; }
-  #scene { width: 100vw; height: 70vh; } /* оставяме място за галерията */
-  #ui { position: fixed; top: 12px; left: 12px; z-index: 10; }
-
-  #thumbs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    padding: 10px;
-    background: #111;
-  }
-
-  #thumbs img {
-    width: 100%;
-    height: 90px;
-    object-fit: cover;
-    cursor: pointer;
-    border: 2px solid transparent;
-  }
-
-  #thumbs img:hover {
-    border-color: #00bcd4;
-  }
+    #scene { width: 100vw; height: 100vh; }
+    #ui { position: fixed; top: 12px; left: 12px; z-index: 10; }
   </style>
 </head>
 
 <body>
   <div id="ui">
-    <button id="vrBtn" type="button">🕶️ Влез във VR</button>
+    <!-- засега бутоните за смяна могат да са неактивни, ще ги вържем с JS -->
+    <button>⬅️</button>
+    <button>➡️</button>
+    <button id="vrBtn">🕶️ VR</button>
     <span id="status"></span>
   </div>
 
@@ -47,14 +29,22 @@
     vr-mode-ui="enabled: false"
   >
     <a-assets>
-      <!-- ВАЖНО: името да съвпада 1:1 с файла в репото (вкл. главни/малки букви) -->
-      <img id="pano" src="krakra.jpg" crossorigin="anonymous" />
-      <!-- Ако файлът ти е krakra,jpg (със запетая), смени реда така:
-           <img id="pano" src="krakra,jpg" crossorigin="anonymous" />
-      -->
+      <!-- ВСИЧКИ панорамни снимки -->
+      <img id="pano-krakra" src="krakra.jpg" crossorigin="anonymous" />
+      <img id="pano-ivan" src="ivan-rilski.jpg" crossorigin="anonymous" />
+      <img id="pano-minen" src="minen-muzei.jpg" crossorigin="anonymous" />
+      <img id="pano-minna" src="minna-direkcia.jpg" crossorigin="anonymous" />
+      <img id="pano-palace" src="palace.jpg" crossorigin="anonymous" />
+      <img id="pano-park" src="park.jpg" crossorigin="anonymous" />
     </a-assets>
 
-    <a-sky src="#pano" rotation="0 -90 0"></a-sky>
+    <!-- ЕДИН sky – започваме с Krakra -->
+    <a-sky
+      id="sky"
+      src="#pano-krakra"
+      rotation="0 -90 0"
+    ></a-sky>
+
     <a-camera look-controls="reverseMouseDrag: true"></a-camera>
   </a-scene>
 <!-- ГАЛЕРИЯ С МИНИАТЮРИ -->
@@ -69,6 +59,4 @@
 </div>
   <script src="app.js"></script>
 </body>
-
 </html>
-
