@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VR 360 – Krakra</title>
+
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+  <!-- минимално “нужно” CSS само за да се вижда сцената -->
+  <style>
+    html, body { margin: 0; height: 100%; }
+    #scene { width: 100vw; height: 100vh; }
+    #ui { position: fixed; top: 12px; left: 12px; z-index: 10; }
+  </style>
+</head>
+
+<body>
+  <div id="ui">
+    <button id="vrBtn" type="button">🕶️ Влез във VR</button>
+    <span id="status"></span>
+  </div>
+
+  <a-scene
+    id="scene"
+    renderer="colorManagement: true;"
+    vr-mode-ui="enabled: false"
+  >
+    <a-assets>
+      <!-- ВАЖНО: името да съвпада 1:1 с файла в репото (вкл. главни/малки букви) -->
+      <img id="pano" src="krakra.jpg" crossorigin="anonymous" />
+      <!-- Ако файлът ти е krakra,jpg (със запетая), смени реда така:
+           <img id="pano" src="krakra,jpg" crossorigin="anonymous" />
+      -->
+    </a-assets>
+
+    <a-sky src="#pano" rotation="0 -90 0"></a-sky>
+    <a-camera look-controls="reverseMouseDrag: true"></a-camera>
+  </a-scene>
+
+  <script src="app.js"></script>
+</body>
+</html>
